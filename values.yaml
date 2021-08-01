@@ -1,8 +1,14 @@
-null
-null
-null
-null
-null
-null
-null
-null
+- name: my-config
+  data:
+    APPLICATION_PORT: "3000"
+- name: my-config
+  data:
+    JSON_STRING: '{a: b}'
+- name: my-config
+  data:
+    num1: "3000"
+    num2: '"4000"'
+- name: my-config
+  data:
+    RPC_HOST: '''http://test.com'''
+    RPC_PORT: "7000"

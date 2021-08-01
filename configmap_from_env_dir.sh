@@ -8,8 +8,15 @@ for file in $(ls ./env); do
 		---
 		$CONFIG_MAP
 		EOF
-		echo $CONFIGMAP | yq e .metadata.name* - -v
-		echo $CONFIGMAP | yq e .data* - -v
+		NAME=$(echo "$CONFIG_MAP" | yq e .metadata.name* -)
+		DATA=$(echo "$CONFIG_MAP" | yq e .data* -)
+		echo "$CONFIG_MAP" | yq e .data* -
+		cat >> values.yaml <<-EOF
+- name: $NAME
+  data:
+EOF
+		INDENTED_DATA=$(echo "$DATA" | sed 's/^/    /')
+		echo "$INDENTED_DATA" >> values.yaml
 	fi	
 	echo $file
 done
